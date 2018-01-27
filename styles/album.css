@@ -33,13 +33,30 @@ body.album {
     font-weight: 300;
     font-size: 0.75rem;
 }
+
+.album-song-list-container {
+  background-color: rgba(255, 255, 255, .5);
+  padding-bottom:2rem;
+  width: 90%;
+  margin:auto;
+}
+
 .album-view-song-list {
-     width: 90%;
      margin: 1.5rem auto;
      font-weight: 300;
      font-size: 0.75em;
      border-collapse: collapse;
+     color: #3c0a39;
  }
+
+ .album-view-list-header {
+   text-align: left;
+   font-weight: bold;
+ }
+
+.album-view-list-header th{
+  padding-top:2rem;
+}
 
  .album-view-song-item {
      height: 3rem;
@@ -47,15 +64,19 @@ body.album {
  }
 
  .song-item-number {
-     width: 5%;
+     width: 15%;
  }
 
  .song-item-title {
-     width: 85%;
+     width: 60%;
  }
 
  .song-item-duration {
-     width: 5%;
+     width: 20%;
+ }
+
+ .song-item-plays {
+   width: 5%;
  }
 
  @media (max-width: 640px) and (min-width: 320px) {
