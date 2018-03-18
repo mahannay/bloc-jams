@@ -1,16 +1,11 @@
  var pointsArray = document.getElementsByClassName('point');
 
- var animatePoints = function(points) {
-
-    for (i = 0; i < points.length; i++) {
-      points[i].style.opacity = 1;
-      points[i].style.transform = "scaleX(1) translateY(0)";
-      points[i].style.msTransform = "scaleX(1) translateY(0)";
-      points[i].style.WebkitTransform = "scaleX(1) translateY(0)";
-    }
-
-  };
-
+ var animatePoints = function(i) {
+      i.style.opacity = 1;
+      i.style.transform = "scaleX(1) translateY(0)";
+      i.style.msTransform = "scaleX(1) translateY(0)";
+      i.style.WebkitTransform = "scaleX(1) translateY(0)";
+   };
 
 var animateHeader = function() {
 
@@ -33,7 +28,7 @@ window.onload = function() {
      window.addEventListener("scroll", function(event) {
          console.log("Current offset from the top is " + sellingPoints.getBoundingClientRect().top + " pixels");
          if (document.documentElement.scrollTop || document.body.scrollTop >= scrollDistance) {
-             animatePoints(pointsArray);
+              forEach(pointsArray, animatePoints);
          }
      });
  }

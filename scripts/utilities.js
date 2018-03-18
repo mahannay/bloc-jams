@@ -1,5 +1,5 @@
-var forEach = function(classname, callback){
- for (i = 0; i < classname.length; i++){
- callback(i);
+var forEach = function(aClass,callback){
+ for (i = 0; i < aClass.length; i++){
+ callback(aClass[i]);
 }
 };
