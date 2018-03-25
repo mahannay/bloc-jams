@@ -30,6 +30,23 @@ var albumMarconi = {
   ]
 };
 
+var albumDurham = {
+  title: "Bull City",
+  artist: "Durhamites",
+  label: "North Carolina",
+  year: "1869",
+  alburmArtUrl: "assets/images/album_covers/06.png",
+  songs: [
+    {title: "Loud, loud train", duration: "4:34"},
+    {title: "Have you seen the new brewery?", duration: "3:21"},
+    {title: "Exam week coffee shops", duration: "2:09"},
+    {title: "Meet me at the food truck rodeo", duration: "3:13"},
+    {title: "Gentrification guilt", duration: "4:32"},
+  ]
+}
+
+var blocAlbums = [albumPicasso, albumMarconi, albumDurham];
+
 var createSongRow = function(songNumber, songName, songLength) {
   var template =
   '<tr class="album-view-song-item">'
@@ -61,6 +78,26 @@ var setCurrentAlbum = function(album) {
     }
 };
 
+var currentAlbum = function(blocAlbums) {
+  var theTitle = document.getElementsByClassName('album-view-title')[0].innerText;
+  for (i = 0; i < blocAlbums.length; i++) {
+    if (theTitle == blocAlbums[i]["title"]) {
+      return i;
+    }
+  }
+}
+
+var toggle = function(blocAlbums) {
+  i = currentAlbum(blocAlbums)
+  if (i < blocAlbums.length) {
+    setCurrentAlbum(blocAlbums[i + 1]);
+  }
+  else {
+    setCurrentAlbum(blocAlbums[0]);
+  }
+}
 window.onload = function() {
-    setCurrentAlbum(albumPicasso);
+    setCurrentAlbum(blocAlbums[0]);
 };
+
+document.getElementsByClassName("album-cover-art")[0].addEventListener("click", toggle(blocAlbums));
