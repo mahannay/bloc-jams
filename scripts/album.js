@@ -78,26 +78,25 @@ var setCurrentAlbum = function(album) {
     }
 };
 
-var currentAlbum = function(blocAlbums) {
+var currentAlbum = function(albumList) {
   var theTitle = document.getElementsByClassName('album-view-title')[0].innerText;
-  for (i = 0; i < blocAlbums.length; i++) {
-    if (theTitle == blocAlbums[i]["title"]) {
+  var i = 0;
+  while ( i < albumList.length) {
+    if (theTitle == albumList[i]["title"]) {
       return i;
     }
   }
-}
-
-var toggle = function(blocAlbums) {
-  i = currentAlbum(blocAlbums)
-  if (i < blocAlbums.length) {
-    setCurrentAlbum(blocAlbums[i + 1]);
-  }
-  else {
-    setCurrentAlbum(blocAlbums[0]);
-  }
-}
-window.onload = function() {
-    setCurrentAlbum(blocAlbums[0]);
 };
 
-document.getElementsByClassName("album-cover-art")[0].addEventListener("click", toggle(blocAlbums));
+
+var doToggle = function(blocAlbums) {
+  var i = currentAlbum(blocAlbums);
+  if (i < blocAlbums.length) {
+  setCurrentAlbum(blocAlbums[i + 1]);
+}
+else {
+  setCurrentAlbum(blocAlbums[0]);
+}
+}
+
+document.getElementsByClassName("album-cover-art")[0].addEventListener("click", doToggle);
