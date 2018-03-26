@@ -35,7 +35,7 @@ var albumDurham = {
   artist: "Durhamites",
   label: "North Carolina",
   year: "1869",
-  alburmArtUrl: "assets/images/album_covers/06.png",
+  albumArtUrl: "assets/images/album_covers/06.png",
   songs: [
     {title: "Loud, loud train", duration: "4:34"},
     {title: "Have you seen the new brewery?", duration: "3:21"},
@@ -85,18 +85,21 @@ var currentAlbum = function(albumList) {
     if (theTitle == albumList[i]["title"]) {
       return i;
     }
+    i+=1;
   }
 };
 
 
-var doToggle = function(blocAlbums) {
+var doToggle = function() {
   var i = currentAlbum(blocAlbums);
-  if (i < blocAlbums.length) {
+  if (i < blocAlbums.length-1) {
   setCurrentAlbum(blocAlbums[i + 1]);
-}
+  }
 else {
   setCurrentAlbum(blocAlbums[0]);
 }
 }
-
+window.onload = function() {
+    setCurrentAlbum(albumPicasso);
+};
 document.getElementsByClassName("album-cover-art")[0].addEventListener("click", doToggle);
