@@ -30,10 +30,27 @@ var albumMarconi = {
   ]
 };
 
+var albumDurham = {
+  title: "Bull City",
+  artist: "Durhamites",
+  label: "North Carolina",
+  year: "1869",
+  albumArtUrl: "assets/images/album_covers/06.png",
+  songs: [
+    {title: "Loud, loud train", duration: "4:34"},
+    {title: "Have you seen the new brewery?", duration: "3:21"},
+    {title: "Exam week coffee shops", duration: "2:09"},
+    {title: "Meet me at the food truck rodeo", duration: "3:13"},
+    {title: "Gentrification guilt", duration: "4:32"},
+  ]
+}
+
+var blocAlbums = [albumPicasso, albumMarconi, albumDurham];
+
 var createSongRow = function(songNumber, songName, songLength) {
   var template =
   '<tr class="album-view-song-item">'
-+     '<td class="song-item-number">' + songNumber + '</td>'
++     '<td class="song-item-number" data-song-number="' + songNumber + '">' + songNumber + '</td>'
 +     '<td class="song-item-title">' + songName + '</td>'
 +     '<td class="song-item-duration">' + songLength + '</td>'
 + '</tr>'
@@ -61,6 +78,51 @@ var setCurrentAlbum = function(album) {
     }
 };
 
+var currentAlbum = function(albumList) {
+  var theTitle = document.getElementsByClassName('album-view-title')[0].innerText;
+  var i = 0;
+  while ( i < albumList.length) {
+    if (theTitle == albumList[i]["title"]) {
+      return i;
+    }
+    i+=1;
+  }
+};
+
+var doToggle = function() {
+  var i = currentAlbum(blocAlbums);
+  if (i < blocAlbums.length-1) {
+  setCurrentAlbum(blocAlbums[i + 1]);
+  }
+else {
+  setCurrentAlbum(blocAlbums[0]);
+}
+};
+
+ // Elements we'll be adding listeners to
+var songRows = document.getElementsByClassName('album-view-song-item');
+var songListContainer = document.getElementsByClassName('album-view-song-list')[0];
+
+// Album button templates
+var playButtonTemplate = '<a class="album-song-button"><span class="ion-play"></span></a>';
+
 window.onload = function() {
     setCurrentAlbum(albumPicasso);
+    songListContainer.addEventListener('mouseover', function(event) {
+      if (event.target.parentElement.className === 'album-view-song-item') {
+                 // Change the content from the number to the play button's HTML
+                 event.target.parentElement.querySelector('.song-item-number').innerHTML = playButtonTemplate;
+             }
+    });
+    for (var i = 0; i < songRows.length; i++) {
+           songRows[i].addEventListener('mouseleave', function(event) {
+             this.children[0].innerHTML = this.children[0].getAttribute('data-song-number');
+           });
+       }
 };
+
+
+
+
+
+document.getElementsByClassName("album-cover-art")[0].addEventListener("click", doToggle);
