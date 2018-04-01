@@ -81,10 +81,18 @@ var setCurrentAlbum = function(album) {
 var findParentByClassName = function(element, targetClass) {
     if (element) {
         var currentParent = element.parentElement;
-        while (currentParent.className !== targetClass && currentParent.className !== null) {
-            currentParent = currentParent.parentElement;
+        if (currentParent == null) {
+          console.log("No parent found");
         }
-        return currentParent;
+        while (currentParent != null) {
+          if (currentParent.className == targetClass) {
+            return currentParent;
+          }
+          else {
+          currentParent = currentParent.parentElement;
+        }
+      };
+        return console.log("No parent with this target class found");;
     }
 };
 
@@ -167,7 +175,8 @@ window.onload = function() {
           var songItem = getSongItem(event.target);
           if (songItem.getAttribute('data-song-number') !== currentlyPlayingSong) {
           songItem.innerHTML = playButtonTemplate;
-          }             }
+          }
+        }
     });
     for (var i = 0; i < songRows.length; i++) {
            songRows[i].addEventListener('mouseleave', function(event) {
