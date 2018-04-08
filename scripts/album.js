@@ -56,7 +56,31 @@ var createSongRow = function(songNumber, songName, songLength) {
 + '</tr>'
 ;
 
-    return $(template);
+var $row = $(template);
+  var onHover = function(event) {
+       if ($(this).parent(".album-view-song-item") == true) {
+         $(this).text(playButtonTemplate);
+         var songItem = getSongItem($(this));
+         if (songItem.attr('data-song-number') !== currentlyPlayingSong) {
+           songItem.text(playButtonTemplate);
+         }
+       }
+   };
+   var offHover = function(event) {
+       for (var i = 0; i < songRows.length; i++) {
+         songRows[i].offHover = function(event) {
+          var songItem = getSongItem($(this));
+          var songItemNumber = songItem.attr('data-song-number');
+          if (songItemNumber !== currentlyPlayingSong) {
+            songItem.text(songItemNumber);
+          }
+         }
+         songRows[i].click(clickHandler);
+       }
+   };
+   $row.find('.song-item-number').click(clickHandler);
+   $row.hover(onHover, offHover);
+   return $row;
 };
 
 var setCurrentAlbum = function(album) {
